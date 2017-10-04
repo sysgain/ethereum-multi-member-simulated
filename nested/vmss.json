@@ -159,10 +159,7 @@
                                                 ]
                                             }
                                         }
-                                    ],
-                                    "dnsSettings": {
-                                        "internalDnsNameLabel": "[variables('txInternalDnsName')]"
-                                    }
+                                    ]
                                 }
                             }
                         ]
@@ -246,10 +243,7 @@
                                                 }
                                             }
                                         }
-                                    ],
-                                    "dnsSettings": {
-                                        "internalDnsNameLabel": "[concat(variables('mninternalDnsName'),copyIndex())]"
-                                    }
+                                    ]
                                 }
                             }
                         ]
@@ -344,10 +338,7 @@
                                                 }
                                             }
                                         }
-                                    ],
-                                    "dnsSettings": {
-                                        "internalDnsNameLabel": "[concat(variables('mninternalDnsName'),copyIndex())]"
-                                    }
+                                    ]
                                 }
                             }
                         ]
