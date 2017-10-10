@@ -94,7 +94,7 @@ function getNodeInfo(hostName, ipAddress, consortiumid) {
     Promise.all(web3PromiseArray).then(function(values){
       var peerCount = values[0];
       var blockNumber = values[1];
-      var nodeInfo = {hostname: hostName, peercount: peerCount, blocknumber: blockNumber, consortiumid: +consortiumid};
+      var nodeInfo = {hostname: hostName, peercount: peerCount, blocknumber: blockNumber, consortiumid:""+consortiumid};
       resolve(nodeInfo);
     });
   });
