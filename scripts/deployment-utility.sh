@@ -23,7 +23,7 @@ function setup_dependencies
         gpg --recv-keys --keyserver hkp://keys.gnupg.net F9585DE6 C2FF8BBF 9BA28146 7B9E2481 D2A67EAC || exit 1;
 
         # Validate signature
-        gpg --verify geth-alltools-linux-amd64-1.5.9-a07539fb.tar.gz.asc || exit 1;
+        gpg --verify geth-alltools-linux-amd64-1.7.1-05101641.tar.gz.asc || exit 1;
 
         # Unpack archive
         tar xzf geth-alltools-linux-amd64-1.7.1-05101641.tar.gz || exit 1;
