@@ -151,6 +151,7 @@ function setup_bootnodes
                 str1=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f2`
 		str2=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f3 | cut -c1-8`
 		str3=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f4`
+		echo "bootstring: $str1 $str2$str3"
 		NODESURLS[$var]=$str1 $str2$str3
          done
          echo "Nodes: ${NODES[*]}"
