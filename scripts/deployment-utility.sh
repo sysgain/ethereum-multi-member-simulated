@@ -102,9 +102,10 @@ function setup_node_info
          #consortium participant ID
          consortiumid=`echo ${NODE} | cut -d "-" -f3 | cut -c5`
          #BOOTNODE_URLS="${BOOTNODE_URLS} --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
-	 echo "NODEID is : ${NODE_ID}"
+	 echo "NODEID is : ${NODE_ID}";
          bootnodeurlpernode=" --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
-         bootnodeurlwithip=" --bootnodes enode://${NODE_ID}@#$NODE#${ipaddress}:${GETH_IPC_PORT}"
+	 echo "BootNodeURL is: $bootnodeurlpernode";
+         bootnodeurlwithip=" --bootnodes enode://${NODE_ID}@#$NODE#${ipaddress}:${GETH_IPC_PORT}";
          #preparing document details
          if [ $NODE_TYPE -eq 1 ];then
          docdata="{\"id\":\"${NODE}\",\"hostname\": \"${NODE}\",\"ipaddress\": \"${ipaddress}\",\"regionId\": \"${regionid}\",\"consortiumid\": \"${consortiumid}\",\"bootNodeUrlNode\": \"${bootnodeurlwithip}\",\"bootNodeUrl\": \"${bootnodeurlpernode}\"}"
@@ -145,7 +146,7 @@ function setup_bootnodes
          hostcount=`echo $alldocs | grep -Po '"hostname":.*?",' | cut -d "," -f1 | cut -d ":" -f2 | wc -l`
          for var in `seq 0 $(($hostcount - 1 ))`; do
                 NODES[$var]=`echo $alldocs | grep -Po '"hostname":.*?",' | sed -n "$(($var + 1 ))p" | cut -d "," -f1 | cut -d ":" -f2 | tr -d "\""`
-                NODESURLS[$var]=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | cut -d " " -f2,3 | sed -n "$(($var + 1 ))p"`
+                NODESURLS[$var]=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p"`
          done
          echo "Nodes: ${NODES[*]}"
          echo "Node URLS are: ${NODESURLS[*]}"
