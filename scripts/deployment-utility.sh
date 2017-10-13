@@ -102,6 +102,7 @@ function setup_node_info
          #consortium participant ID
          consortiumid=`echo ${NODE} | cut -d "-" -f3 | cut -c5`
          #BOOTNODE_URLS="${BOOTNODE_URLS} --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
+	 echo "NODEID is : ${NODE_ID}"
          bootnodeurlpernode=" --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
          bootnodeurlwithip=" --bootnodes enode://${NODE_ID}@#$NODE#${ipaddress}:${GETH_IPC_PORT}"
          #preparing document details
