@@ -145,7 +145,7 @@ function setup_bootnodes
          hostcount=`echo $alldocs | grep -Po '"hostname":.*?",' | cut -d "," -f1 | cut -d ":" -f2 | wc -l`
          for var in `seq 0 $(($hostcount - 1 ))`; do
                 NODES[$var]=`echo $alldocs | grep -Po '"hostname":.*?",' | sed -n "$(($var + 1 ))p" | cut -d "," -f1 | cut -d ":" -f2 | tr -d "\""`
-                NODESURLS[$var]=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p"`
+                NODESURLS[$var]=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | cut -d " " -f2,3 | sed -n "$(($var + 1 ))p"`
          done
          echo "Nodes: ${NODES[*]}"
          echo "Node URLS are: ${NODESURLS[*]}"
