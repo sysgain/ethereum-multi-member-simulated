@@ -114,6 +114,7 @@ function setup_node_info
          else
          docdata="{\"id\":\"${NODE}\",\"hostname\": \"${NODE}\",\"ipaddress\": \"${ipaddress}\",\"regionId\": \"${regionid}\",\"consortiumid\": \"NA\",\"bootNodeUrlNode\": \"${bootnodeurlwithip}\",\"bootNodeUrl\": \"${bootnodeurlpernode}\"}"
          fi
+	 echo "Document Data: $docdata"
          #create a document in database with the current node info
          sh getpost-utility.sh $masterkey "${endpointurl}dbs/${dbname}/colls/${collname}/docs" "post" "$docdata"
          previousuniqid=${NODE}
@@ -124,6 +125,7 @@ function setup_node_info
                  else
                          docdata="{\"id\":\"${uniqid}\",\"hostname\": \"${NODE}\",\"ipaddress\": \"${ipaddress}\",\"regionId\": \"${regionid}\",\"consortiumid\": \"NA\",\"bootNodeUrlNode\": \"${bootnodeurlwithip}\",\"bootNodeUrl\": \"${bootnodeurlpernode}\"}"
                  fi
+		 echo "Document Data updated: $docdata"
                  sh getpost-utility.sh $masterkey "${endpointurl}dbs/${dbname}/colls/${collname}/docs/${previousuniqid}" "put" "$docdata"
                  previousuniqid=${uniqid}          
          done &
