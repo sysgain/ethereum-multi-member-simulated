@@ -104,10 +104,11 @@ function setup_node_info
          #BOOTNODE_URLS="${BOOTNODE_URLS} --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
 	 echo "NODE is: ${NODE}"
 	 echo "NODEID is : ${NODE_ID}";
+	 echo "GETH_IPC_PORT is: ${GETH_IPC_PORT}"
          bootnodeurlpernode=" --bootnodes enode://${NODE_ID}@#${NODE}#:${GETH_IPC_PORT}";
 	 echo "BootNodeURL is: ${bootnodeurlpernode}";
-         bootnodeurlwithip=" --bootnodes enode://${NODE_ID}@#${NODE}#${ipaddress}:${GETH_IPC_PORT}";
-	 echo "BootNodeURL is: ${bootnodeurlwithip}";
+         bootnodeurlwithip=" --bootnodes enode://"${NODE_ID}"@#"${NODE}"#"${ipaddress}":"${GETH_IPC_PORT};
+	 echo "BootNodeURL with IP is: ${bootnodeurlwithip}";
          #preparing document details
          if [ $NODE_TYPE -eq 1 ];then
          docdata="{\"id\":\"${NODE}\",\"hostname\": \"${NODE}\",\"ipaddress\": \"${ipaddress}\",\"regionId\": \"${regionid}\",\"consortiumid\": \"${consortiumid}\",\"bootNodeUrlNode\": \"${bootnodeurlwithip}\",\"bootNodeUrl\": \"${bootnodeurlpernode}\"}"
