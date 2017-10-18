@@ -103,15 +103,15 @@ function setup_node_info
          consortiumid=`echo ${NODE} | cut -d "-" -f3 | cut -c5`
          #BOOTNODE_URLS="${BOOTNODE_URLS} --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
 	 echo "NODE is: ${NODE}"
-	 echo "NODEID length is:`echo ${NODE_ID} | wc -c`"
+	 echo "NODEID length is:`echo ${NODE_ID} | cut -c1-128| wc -c`"
 	 str1=" --bootnodes enode://"
 	 echo "str1: ${str1}"
-	 str2=${NODE_ID}
-	 echo "str1: ${str2}"
+	 str2=`echo ${NODE_ID} | cut -c1-128`
+	 echo "str2: ${str2}"
 	 str3=${NODE}
-	 echo "str1: ${str3}"
+	 echo "str3: ${str3}"
 	 str4=${GETH_IPC_PORT}
-	 echo "str1: ${str4}"
+	 echo "str4: ${str4}"
 	 str5="@#"
 	 str6="#:"
 	 echo "bootnode url with string values are: ${str1}${str2}${str5}${str3}${str6}${str4}"
