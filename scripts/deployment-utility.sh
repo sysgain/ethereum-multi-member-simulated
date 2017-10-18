@@ -107,12 +107,14 @@ function setup_node_info
 	 str2=${NODE_ID}
 	 str3=${NODE}
 	 str4=${GETH_IPC_PORT}
+	 echo "string values are: ${str1}${str2}${str3}${str4}"
+	  echo "bootnode url with string values are: ${str1}${str2}@#${str3}#:${str4}"
 	 echo "NODEID is : ${NODE_ID}";
 	 echo "GETH_IPC_PORT is: ${GETH_IPC_PORT}"
          bootnodeurlpernode=" --bootnodes enode://${NODE_ID}@#${NODE}#:${GETH_IPC_PORT}";
 	 echo "BootNodeURL is: ${bootnodeurlpernode}";
          #bootnodeurlwithip=" --bootnodes enode://"${NODE_ID}"@#"${NODE}"#"${ipaddress}":"${GETH_IPC_PORT};
-	 bootnodeurlwithip=$str1$str2@#$str3#${ipaddress}:$str4
+	 bootnodeurlwithip="${str1}${str2}@#${str3}#${ipaddress}:${str4}"
 	 echo "BootNodeURL with IP is: ${bootnodeurlwithip}";
          #preparing document details
          if [ $NODE_TYPE -eq 1 ];then
