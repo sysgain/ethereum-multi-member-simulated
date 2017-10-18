@@ -104,23 +104,11 @@ function setup_node_info
          #BOOTNODE_URLS="${BOOTNODE_URLS} --bootnodes enode://${NODE_ID}@#$NODE#:${GETH_IPC_PORT}";
 	 echo "NODE is: ${NODE}"
 	 echo "NODEID length is:`echo ${NODE_ID} | cut -c1-128| wc -c`"
-	 str1=" --bootnodes enode://"
-	 echo "str1: ${str1}"
-	 str2=`echo ${NODE_ID} | cut -c1-128`
-	 echo "str2: ${str2}"
-	 str3=${NODE}
-	 echo "str3: ${str3}"
-	 str4=${GETH_IPC_PORT}
-	 echo "str4: ${str4}"
-	 str5="@#"
-	 str6="#:"
-	 echo "bootnode url with string values are: ${str1}${str2}${str5}${str3}${str6}${str4}"
-	 echo "NODEID is : ${NODE_ID}";
-	 echo "GETH_IPC_PORT is: ${GETH_IPC_PORT}"
+	 NODE_ID=`echo ${NODE_ID} | cut -c1-128`
+	 echo "NODE ID is: ${NODE_ID}"
          bootnodeurlpernode=" --bootnodes enode://${NODE_ID}@#${NODE}#:${GETH_IPC_PORT}";
 	 echo "BootNodeURL is: ${bootnodeurlpernode}";
-         #bootnodeurlwithip=" --bootnodes enode://"${NODE_ID}"@#"${NODE}"#"${ipaddress}":"${GETH_IPC_PORT};
-	 bootnodeurlwithip="${str1}${str2}@#${str3}#${ipaddress}:${str4}"
+         bootnodeurlwithip=" --bootnodes enode://"${NODE_ID}"@#"${NODE}"#"${ipaddress}":"${GETH_IPC_PORT};
 	 echo "BootNodeURL with IP is: ${bootnodeurlwithip}";
          #preparing document details
          if [ $NODE_TYPE -eq 1 ];then
@@ -128,8 +116,7 @@ function setup_node_info
          else
          docdata="{\"id\":\"${NODE}\",\"hostname\": \"${NODE}\",\"ipaddress\": \"${ipaddress}\",\"regionId\": \"${regionid}\",\"consortiumid\": \"NA\",\"bootNodeUrlNode\": \"${bootnodeurlwithip}\",\"bootNodeUrl\": \"${bootnodeurlpernode}\"}"
          fi
-	 echo "Document Data: $docdata"
-         #create a document in database with the current node info
+	 #create a document in database with the current node info
          sh getpost-utility.sh $masterkey "${endpointurl}dbs/${dbname}/colls/${collname}/docs" "post" "$docdata"
          previousuniqid=${NODE}
          while sleep $sleeptime; do
@@ -139,9 +126,8 @@ function setup_node_info
                  else
                          docdata="{\"id\":\"${uniqid}\",\"hostname\": \"${NODE}\",\"ipaddress\": \"${ipaddress}\",\"regionId\": \"${regionid}\",\"consortiumid\": \"NA\",\"bootNodeUrlNode\": \"${bootnodeurlwithip}\",\"bootNodeUrl\": \"${bootnodeurlpernode}\"}"
                  fi
-		 echo "Document Data updated: $docdata"
-                 sh getpost-utility.sh $masterkey "${endpointurl}dbs/${dbname}/colls/${collname}/docs/${previousuniqid}" "put" "$docdata"
-                 previousuniqid=${uniqid}          
+	                 sh getpost-utility.sh $masterkey "${endpointurl}dbs/${dbname}/colls/${collname}/docs/${previousuniqid}" "put" "$docdata"
+                         previousuniqid=${uniqid}          
          done &
 }
 
@@ -164,11 +150,12 @@ function setup_bootnodes
          hostcount=`echo $alldocs | grep -Po '"hostname":.*?",' | cut -d "," -f1 | cut -d ":" -f2 | wc -l`
          for var in `seq 0 $(($hostcount - 1 ))`; do
                 NODES[$var]=`echo $alldocs | grep -Po '"hostname":.*?",' | sed -n "$(($var + 1 ))p" | cut -d "," -f1 | cut -d ":" -f2 | tr -d "\""`
-                str1=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f2`
-		str2=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f3 | cut -c1-8`
-		str3=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f4`
-		echo "bootstring: $str1 $str2$str3"
-		NODESURLS[$var]="$str1 $str2$str3"
+                NODESURLS[$var]=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p"`
+		#str1=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f2`
+		#str2=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f3 | cut -c1-8`
+		#str3=`echo $alldocs | grep -Po '"bootNodeUrl":.*?",'| cut -d "," -f1 | cut -d '"' -f4 | sed -n "$(($var + 1 ))p" | cut -d " " -f4`
+		#echo "bootstring: $str1 $str2$str3"
+		#NODESURLS[$var]="$str1 $str2$str3"
          done
          echo "Nodes: ${NODES[*]}"
          echo "Node URLS are: ${NODESURLS[*]}"
