@@ -224,7 +224,7 @@
                         "imageReference": "[parameters('ubuntuImage')]"
                     },
                     "osProfile": {
-                        "computerNamePrefix": "[concat(variables('mnVmssName'),copyIndex(1))]",
+                        "computerNamePrefix": "[concat(variables('mnVmssName'),'pwd',copyIndex(1))]",
                         "adminUsername": "[variables('adminUsername')]",
                         "adminPassword": "[variables('adminPassword')]"
                     },
@@ -308,7 +308,7 @@
                         "imageReference": "[parameters('ubuntuImage')]"
                     },
                     "osProfile": {
-                        "computerNamePrefix": "[concat(variables('mnVmssName'),copyIndex(1))]",
+                        "computerNamePrefix": "[concat(variables('mnVmssName'),'ssh',copyIndex(1))]",
                         "adminUsername": "[variables('adminUsername')]",
                         "adminPassword": "[variables('adminPassword')]",
                         "linuxConfiguration": {
