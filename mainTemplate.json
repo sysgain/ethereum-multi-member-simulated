@@ -44,12 +44,14 @@
         },
         "ethereumAccountPsswd": {
             "type": "securestring",
+            "defaultValue": "",
             "metadata": {
                 "description": "Password used to secure the default Ethereum account that will be generated"
             }
         },
         "ethereumAccountPassphrase": {
             "type": "securestring",
+            "defaultValue": "",
             "metadata": {
                 "description": "Password used to generate the private key associated with the default Ethereum account that is generated.  Consider a password with sufficient randomness to ensure a strong private key"
             }
@@ -82,13 +84,14 @@
         },
         "mnNodeVMSize": {
             "type": "string",
-            "defaultValue": "Standard_A1",
+            "defaultValue": "",
             "metadata": {
                 "description": "Size of the virtual machine used for mining nodes"
             }
         },
         "mnStorageAccountType": {
             "type": "string",
+            "defaultValue": "",
             "allowedValues": [
                 "Standard_LRS",
                 "Premium_LRS"
@@ -108,13 +111,14 @@
         },
         "txNodeVMSize": {
             "type": "string",
-            "defaultValue": "Standard_A1",
+            "defaultValue": "",
             "metadata": {
                 "description": "Size of the virtual machine for transaction nodes"
             }
         },
         "txStorageAccountType": {
             "type": "string",
+            "defaultValue": "",
             "allowedValues": [
                 "Standard_LRS",
                 "Premium_LRS"
@@ -125,6 +129,7 @@
         },
         "location": {
             "type": "string",
+            "defaultValue": "",
             "metadata": {
                 "description": "Select the location to deploy the solution"
             }
