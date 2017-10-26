@@ -47,7 +47,8 @@
                 "options": {
                     "hideConfirmation": false
                 },
-                "osPlatform": "Linux"
+                "osPlatform": "Linux",
+                "visible": true
             }
         ],
         "steps": [
