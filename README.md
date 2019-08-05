@@ -1,1 +1,1 @@
-# ethereum-multi-member-simulated
+# ethereum-simulated-multimember
